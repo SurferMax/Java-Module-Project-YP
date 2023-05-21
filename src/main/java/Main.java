@@ -7,8 +7,8 @@ public class Main {
         do{
             generator.generateNewGood(); // Создаем первый товар;
         } while (generator.askingMoreGoods()); // Тут спрашиваем нужны ли еще товары;
-        System.out.println("Добавили все товары, какие мы хотели");
-        System.out.println(generator.showTotalPrice());
+        // System.out.println("Добавили все товары, какие мы хотели");
+        generator.showTotalPrice();
         generator.bill(result); // Метод проводит расчет по покупкам;
     }
 }

@@ -10,20 +10,22 @@ public class newGoodGenerator { // Добавить с большой буквы
     System.out.println("Введите название товара, чтобы добавить его");
     // String descriptionArrived = scanner.next(); Была ошибка, что считывал только до пробела и выкидывал ошибку.
     this.nameToSet = scanner.nextLine();
-    System.out.println("Введите цену товара, чтобы добавить ее (рубли.копейки)");
-        while (true) // Проверка на то, чтобы ввели именно число. Можно было бы вынести в отдельный метод. Но в контексте работы, не хотелось бы.
-        {
-            if (scanner.hasNextDouble() || scanner.hasNextLong() || scanner.hasNextInt())
+        do {
+            System.out.println("Введите цену товара, чтобы добавить ее (рубли.копейки)");
+            while (true) // Проверка на то, чтобы ввели положительное число. Можно было бы вынести в отдельный метод. Но в контексте работы, не хотелось бы.
             {
-                this.priceToSet = Double.parseDouble(scanner.nextLine());
-                System.out.println("Вы ввели: " + this.priceToSet);
-                break;
+                if (scanner.hasNextDouble() || scanner.hasNextLong() || scanner.hasNextInt()) {
+                    this.priceToSet = Double.parseDouble(scanner.nextLine());
+                        if (this.priceToSet < 1) {
+                        System.out.println("Вы ввели отрицательное число: " + this.priceToSet);
+                        }
+                    break;
+                }   else {
+                    System.out.println("Вы ввели не число, повторите");
+                    scanner.nextLine();
+                }
             }
-            else
-            {
-                System.out.println("Вы ввели не число, повторите");
-                scanner.nextLine();
-            }}
+        } while (this.priceToSet <= 1);
     Good goodToSend = new Good(); // Создаем новый товар из класса Good;
     String goodAdded = goodToSend.goodCreated(this.nameToSet, this.priceToSet);
     this.addingNewGood(this.nameToSet, this.priceToSet);
@@ -50,7 +52,7 @@ public class newGoodGenerator { // Добавить с большой буквы
     }
     public String showTotalPrice() { // Метод показывает общую форму заказа;
         String formattedDouble = String.format("%.2f", totalPrice); // Можно было бы вынести в отдельный метод, чтобы было DRY, но не вижу смысла;
-        System.out.println("Цена всего заказа: " + totalPrice);
+        System.out.println("Цена всего заказа: " + formattedDouble);
         return formattedDouble;
     }
 
